@@ -415,11 +415,7 @@ const app = new Vue({
     		this.show_calculator_modal = !this.show_calculator_modal;
     	},
     	cookieIsSet: function () {
-    		let name = 'coockie';
-			let matches = document.cookie.match(new RegExp(
-			    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-			  ));
-			let result = matches ? decodeURIComponent(matches[1]) : undefined;
+			let result = this.getCookie('coockie');
 			result !== 'confirmed' ? this.show_cookie = true : this.show_cookie = false;
   		},
   		getCookie: function (name) {
