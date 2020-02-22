@@ -397,7 +397,7 @@ const app = new Vue({
   				this.result[row.code] = null;
   			}
   		});
-  		this.getCookie();
+  		this.cookieIsSet();
   	},
     computed: {
         filteredTable: function() {
@@ -414,13 +414,19 @@ const app = new Vue({
     		this.w_f_o_co = weight_factor_of_courses;
     		this.show_calculator_modal = !this.show_calculator_modal;
     	},
-    	getCookie: function () {
+    	cookieIsSet: function () {
     		let name = 'coockie';
 			let matches = document.cookie.match(new RegExp(
 			    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
 			  ));
 			let result = matches ? decodeURIComponent(matches[1]) : undefined;
 			result !== 'confirmed' ? this.show_cookie = true : this.show_cookie = false;
+  		},
+  		getCookie: function (name) {
+			let matches = document.cookie.match(new RegExp(
+			    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+			  ));
+			return matches ? decodeURIComponent(matches[1]) : undefined;
   		},
   		confirmUsingCookie: function () {
 			document.cookie = 'coockie=confirmed;expires=' + (new Date).getTime() + (2 * 365 * 24 * 60 * 60 * 1000);
